@@ -32,55 +32,56 @@ one sig One, Two extends Player {}
 pred wellformed {
 
     -- all number cards are created
-    // all n: Int | {
-
-
-        all n: Int, c: Color | (n >= 0 and n <= 5) implies {
-            some card: NumberCard | {
-                card.number = n
-                card.color = c
-            }
-        } 
-    //     // else {
-    //     //     no card: NumberCard | {
-    //     //         card.number = n
-    //     //         // card.color = c
-    //     //     }
-    //     // }
-    // }
+    all n: Int, c: Color | (n >= 0 and n <= 5) implies {
+        some card: NumberCard | {
+            card.number = n
+            card.color = c
+        }
+    }else {
+        no card: NumberCard | {
+            card.number = n
+        }
+    }
 
     -- game has two players
     Game.players = (One + Two)
 
-    
 }
 
 pred init {
 
     wellformed
+
+    // 24 number cards total
+    #{NumberCard} = 24
     
-    // // no card played
-    // no Game.lastPlayed
-
-    // #{NumberCard} = 40
-
+    // random last played to start
+    some c: Card | {
+        Game.lastPlayed = c
+    }
+    
     // each player's hand has the correct number of cards
-    // #{card: Card | card in One.hand} = 4
-    // #{card: Card | card in Two.hand} = 4
+    #{card: Card | card in One.hand} = 4
+    #{card: Card | card in Two.hand} = 4
 
     // the deck has the original number of cards minus the cards in each player's hand
-    // #{card: Card | card in Deck.cards} = 32
+    #{card: Card | card in Deck.cards} = 15
     // the deck is all the number cards that aren't in a player's hand
-    // Deck.cards = NumberCard - (One.hand + Two.hand)
+    Deck.cards = NumberCard - (One.hand + Two.hand + Game.lastPlayed)
 
     // it's player One's turn
-    // Game.turn = One
+    Game.turn = One
 
     // no intersection between the two hands
-    // no One.hand & Two.hand
-    // // no intersection between the deck & hands
-    // no Deck.cards & One.hand
-    // no Deck.cards & Two.hand
+    no One.hand & Two.hand
+    // no intersection between the deck & hands
+    no Deck.cards & One.hand
+    no Deck.cards & Two.hand
+    // no intersection between last played & hands
+    no Game.lastPlayed & One.hand
+    no Game.lastPlayed & Two.hand
+    // no intersection between deck & last played
+    no Deck.cards & Game.lastPlayed
     
 }
 
@@ -92,53 +93,58 @@ pred final {
 }
 
 pred playable[playablecard: Card] {
+
     // the card needs to be valid to be played according to the last discarded card
-    playablecard.number = Game.lastPlayed.number or 
-    playablecard.color = Game.lastPlayed.color 
+    (playablecard.number = Game.lastPlayed.number) or (playablecard.color = Game.lastPlayed.color)
+}
+
+pred play[c: Card] {
+    Game.lastPlayed' = c
+    Game.turn.hand' = Game.turn.hand - c
+    Deck.cards' = Deck.cards
+}
+
+pred draw {
+    some c: Card | {
+        -- card comes from deck
+        c in Deck.cards
+
+        Deck.cards' = (Deck.cards - c)
+
+        -- can play it
+        playable[c] implies {
+            Game.lastPlayed' = c
+            Game.turn.hand' = Game.turn.hand
+        } else { -- can't play it
+            Game.lastPlayed' = Game.lastPlayed
+            Game.turn.hand' = Game.turn.hand + c
+        }
+    }
 }
 
 pred move {
 
-    // // player doesn't have a card to play so they draw one card and:
+    // player does have a card to play so they play it
+    some c: Card | {(c in Game.turn.hand) and playable[c]} implies {
+        play[c]
+    } else { // player doesn't have a card to play so they draw one card
+        draw
+    }
 
-
-    // // player does have a card to play so they play it
-    // some c: Card | (c in Game.turn.hand and playable[c]) implies {
-    //     Game.lastPlayed' = c
-    //     Game.turn.hand' = Game.turn.hand - c
-    // } else {
-    //     some c: Card | {
-    //         -- card comes from deck
-    //         c in Deck.cards
-
-    //         Deck.cards' = (Deck.cards - c)
-
-    //         -- can play it
-    //         playable[c] implies {
-    //             Game.lastPlayed' = c
-    //             Game.turn.hand' = Game.turn.hand
-    //         } else { -- can't play it
-    //             Game.lastPlayed' = Game.lastPlayed
-    //             Game.turn.hand' = Game.turn.hand + c
-    //         }
-    //     }
+    // change whose turn it is
+    (Game.turn = One) implies {
+        -- hand of inactive player stays the same
+        Two.hand' = Two.hand
+        -- change turn
+        Game.turn' = Two
+    }
+    (Game.turn = Two) implies {
+        -- hand of inactive player stays the same
+        One.hand' = One.hand
+        -- change turn
+        Game.turn' = One
         
-    // }
-
-    // // change whose turn it is
-    // (Game.turn = One) implies {
-    //     -- hand of inactive player stays the same
-    //     Two.hand' = Two.hand
-    //     -- change turn
-    //     Game.turn' = Two
-    // }
-    // (Game.turn = Two) implies {
-    //     -- hand of inactive player stays the same
-    //     One.hand' = One.hand
-    //     -- change turn
-    //     Game.turn' = One
-        
-    // }
+    }
 
 }
 
@@ -163,8 +169,14 @@ pred doNothing {
 pred traces {
     
     init
-    // move
-    // next_state doNothing
+    move // one plays (3 cards left)
+    next_state move // two plays
+    next_state next_state move // one plays (2 cards left)
+    next_state next_state next_state move // two plays
+    // next_state next_state next_state next_state move // one plays (1 card left)
+    // next_state next_state next_state next_state next_state move // two plays
+    // next_state next_state next_state next_state next_state next_state move // one plays (0 cards left)
+    // next_state next_state next_state next_state next_state next_state next_state final
 
     // always {
     //     final implies {
