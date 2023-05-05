@@ -1,5 +1,6 @@
 #lang forge
 option problem_type temporal
+option max_tracelength 10
 
 abstract sig Color {}
 one sig Red extends Color {}
@@ -124,11 +125,11 @@ pred draw {
 
 pred move {
 
-    // player does have a card to play so they play it
-    some c: Card | {(c in Game.turn.hand) and playable[c]} implies {
-        play[c]
-    } else { // player doesn't have a card to play so they draw one card
+    // if there is no card that is both in the player's hand and playable, draw
+    (no c: Card | {(c in Game.turn.hand) and playable[c]}) implies {
         draw
+    } else { // player doesn't have a card to play so they draw one card
+        some c2: Card | {(c2 in Game.turn.hand) and playable[c2] and play[c2]}
     }
 
     // change whose turn it is
@@ -169,22 +170,23 @@ pred doNothing {
 pred traces {
     
     init
-    move // one plays (3 cards left)
-    next_state move // two plays
-    next_state next_state move // one plays (2 cards left)
-    next_state next_state next_state move // two plays
+    // move // one plays (3 cards left)
+    // next_state move // two plays
+    // next_state next_state move // one plays (2 cards left)
+    // next_state next_state next_state move // two plays
     // next_state next_state next_state next_state move // one plays (1 card left)
     // next_state next_state next_state next_state next_state move // two plays
     // next_state next_state next_state next_state next_state next_state move // one plays (0 cards left)
     // next_state next_state next_state next_state next_state next_state next_state final
+    // next_state next_state next_state next_state next_state next_state next_state next_state final
 
-    // always {
-    //     final implies {
-    //         doNothing
-    //     } else {
-    //         move
-    //     }
-    // }
+    always {
+        final implies {
+            doNothing
+        } else {
+            move
+        }
+    }
 
 }
 
