@@ -170,7 +170,7 @@ pred doNothing {
 pred traces {
     
     init
-    // move // one plays (3 cards left)
+    move // one plays (3 cards left)
     // next_state move // two plays
     // next_state next_state move // one plays (2 cards left)
     // next_state next_state next_state move // two plays
@@ -180,13 +180,13 @@ pred traces {
     // next_state next_state next_state next_state next_state next_state next_state final
     // next_state next_state next_state next_state next_state next_state next_state next_state final
 
-    always {
-        final implies {
-            doNothing
-        } else {
-            move
-        }
-    }
+    // always {
+    //     final implies {
+    //         doNothing
+    //     } else {
+    //         move
+    //     }
+    // }
 
 }
 
