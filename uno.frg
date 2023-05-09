@@ -33,7 +33,7 @@ one sig One, Two extends Player {}
 pred wellformed {
 
     -- all number cards are created
-    all n: Int, c: Color | (n >= 0 and n <= 5) implies {
+    all n: Int, c: Color | (n >= 0 and n <= 2) implies {
         some card: NumberCard | {
             card.number = n
             card.color = c
@@ -54,7 +54,7 @@ pred init {
     wellformed
 
     // 24 number cards total
-    #{NumberCard} = 24
+    #{NumberCard} = 12
     
     // random last played to start
     some c: Card | {
@@ -62,11 +62,11 @@ pred init {
     }
     
     // each player's hand has the correct number of cards
-    #{card: Card | card in One.hand} = 4
-    #{card: Card | card in Two.hand} = 4
+    #{card: Card | card in One.hand} = 3
+    #{card: Card | card in Two.hand} = 3
 
-    // the deck has the original number of cards minus the cards in each player's hand
-    #{card: Card | card in Deck.cards} = 15
+    // the deck has the original number of cards minus the cards in each player's hand minus last played card
+    #{card: Card | card in Deck.cards} = 5
     // the deck is all the number cards that aren't in a player's hand
     Deck.cards = NumberCard - (One.hand + Two.hand + Game.lastPlayed)
 
@@ -192,7 +192,4 @@ pred traces {
 
 run {
     traces
-} for 6 Int, exactly 24 NumberCard
-
-
-
+} for 5 Int, exactly 12 NumberCard
