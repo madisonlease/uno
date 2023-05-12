@@ -54,7 +54,7 @@ pred init {
 
     wellformed
 
-    // 24 number cards total
+    // 12 number cards total
     #{NumberCard} = 12
     
     // random last played to start
@@ -189,6 +189,18 @@ pred traces {
         }
     }
 
+}
+
+/* PREDS FOR THEOREM TESTS */ 
+
+// at every state, a player must play, draw, or doNothing
+pred somethingHappens {
+    (some c: Card | play[c]) or (draw) or (doNothing)
+}
+
+// there is always one lastPlayed card
+pred lastPlayed {
+    #{some c: Card | c in Game.lastPlayed} = 1
 }
 
 run {

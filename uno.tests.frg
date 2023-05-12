@@ -109,27 +109,79 @@ test expect {
         draw
         #{card: Card | card in One.hand'} = #{card: Card | card in One.hand}
     } for 5 Int, exactly 12 NumberCard, exactly 2 Player is sat
-
 }
 
-/* MISCELLANEOUS */
+/* EXPLORATION */
 test expect {
 
-    // can eventually reach a state where both players have one card
+    // can we eventually reach a state where both players have one card?
+    -- yes!
     doubleUno: {
         traces
         eventually (#{card: Card | card in One.hand} = 1 and #{card: Card | card in Two.hand} = 1)
     } for 5 Int, exactly 12 NumberCard, exactly 2 Player is sat
 
+    // is it possible to have a game where no one can ever play?
+    -- no, because in any 7 cards there must be a playable card, so even if
+    -- both players don't have a playable card to begin, once one player draws they
+    -- will be able to play
+    alwaysDraw: {
+        traces 
+        always draw
+    } for 5 Int, exactly 12 NumberCard, exactly 2 Player is unsat
+
+    // is it possible for neither player to be able to play in their first turn?
+    -- yes, because there are always 6 cards that cannot be played on top of any one card
+    noPlayableCards: {
+        traces
+        no c: Card | {
+            c in One.hand
+            playable[c]
+        }
+        no c: Card | {
+            c in Two.hand 
+            playable[c]
+        }
+    } for 5 Int, exactly 12 NumberCard, exactly 2 Player is sat
+
+    // if there is no playable card in either player's hand, the next card drawn must be playable
+    nextCardPlayable: {
+        traces
+        no c: Card | {
+            c in One.hand
+            playable[c]
+        }
+        no c: Card | {
+            c in Two.hand 
+            playable[c]
+        }
+        draw
+        next_state draw
+        next_state next_state (some c: Card | play[c])
+    } for 5 Int, exactly 12 NumberCard, exactly 2 Player is sat
+
+    // is it possible for players to never draw?
+    -- yes :)
+    alwaysPlay: {
+        traces
+        always (some c: Card | play[c])
+    } for 5 Int, exactly 12 NumberCard, exactly 2 Player is sat
+    
 }
 
-/* THEOREM */
+/* THEOREM TESTS */
 test expect {
 
     // always wellformed
     alwaysWellformed: {
         traces implies always wellformed
     } for 5 Int, exactly 12 NumberCard, exactly 2 Player is theorem
-
+    // always somethingHappens
+    alwaysSomethingHappens: {
+        traces implies always somethingHappens
+    } for 5 Int, exactly 12 NumberCard, exactly 2 Player is theorem
+    // always lastPlayed
+    alwaysLastPlayed: {
+        traces implies always lastPlayed
+    } for 5 Int, exactly 12 NumberCard, exactly 2 Player is theorem
 }
-
