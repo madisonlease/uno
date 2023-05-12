@@ -1,40 +1,39 @@
+d3 = require('d3')
+d3.selectAll("svg > *").remove();
+
 // Create a new window
 var popup = window.open("", "popup", "width=450,height=200");
-const deck = Deck
-const player1 = One
-const unogame = Game 
-const hand1 = player1.hand
-const url1 = 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fed3bb24-454f-4bdf-a721-6aa8f23e7cef/d9gnihf-ec16caeb-ec9c-4870-9480-57c7711d844f.png/v1/fill/w_486,h_759/uno_card_back_by_wackosamurai_d9gnihf-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzU5IiwicGF0aCI6IlwvZlwvZmVkM2JiMjQtNDU0Zi00YmRmLWE3MjEtNmFhOGYyM2U3Y2VmXC9kOWduaWhmLWVjMTZjYWViLWVjOWMtNDg3MC05NDgwLTU3Yzc3MTFkODQ0Zi5wbmciLCJ3aWR0aCI6Ijw9NDg2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.TMtpsV_KVjgkIMqwza3ooob2Xq5bihDuT0JVsOldrpA'; 
 
+/** URLs for each card */ 
 const red0 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-red0.png';
-const blue0 = 'https://www.shutterstock.com/shutterstock/photos/1934989541/display_1500/stock-photo-negotin-serbia-march-uno-playing-card-zero-in-blue-color-playing-card-isolated-1934989541.jpg';
+const blue0 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-blue0.png';
 const yellow0 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-yellow0.png';
-const green0 = 'https://www.shutterstock.com/shutterstock/photos/1934990045/display_1500/stock-photo-negotin-serbia-march-uno-playing-card-zero-in-blue-green-playing-card-isolated-1934990045.jpg';
+const green0 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-green0.png';
 const red1 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-red1.png';
-const blue1 = 'https://i.pinimg.com/474x/80/8a/e0/808ae01a2c8c8634b967c9a9ea59b1cf.jpg';
-const yellow1 = 'https://cdna.artstation.com/p/assets/images/images/043/685/602/large/nicholas-fox-uno-yellow.jpg?1637968813';
+const blue1 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-blue1.png';
+const yellow1 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-yellow1.png';
 const green1 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-green1.png';
-const red2 = 'https://www.shutterstock.com/shutterstock/photos/1935293165/display_1500/stock-photo-negotin-serbia-march-uno-playing-card-two-in-red-color-playing-card-isolated-on-1935293165.jpg';
-const blue2 = 'https://i.pinimg.com/474x/19/e4/4a/19e44a67eef087ce9b4ed590ddac5509.jpg'; 
+const red2 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-red2.png';
+const blue2 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-blue2.png'; 
 const yellow2 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-yellow2.png';
-const green2 = 'https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/75061/green-2-card-clipart-xl.png';
-const red3 = 'https://cdnb.artstation.com/p/assets/images/images/043/685/567/large/nicholas-fox-uno-red.jpg?1637968732';
+const green2 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-green2.png';
+const red3 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-red3.png';
 const blue3 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-blue3.png'; 
 const yellow3 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-yellow3.png';
-const green3 = 'https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/75062/green-3-card-clipart-md.png'; 
-const red4 = 'https://i.pinimg.com/474x/0f/09/54/0f09541f4405675c31ce6c97e13c237c.jpg'; 
-const blue4 = 'https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/75050/blue-4-card-clipart-md.png'; 
+const green3 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-green3.png'; 
+const red4 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-red4.png'; 
+const blue4 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-blue4.png'; 
 const yellow4 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-yellow4.png'; 
 const green4 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-green4.png'; 
 const red5 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-red5.png';
 const blue5 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-blue5.png'; 
-const yellow5 = 'https://i.pinimg.com/474x/58/24/f4/5824f495b04f358f9fa6a4c0cdaf3605.jpg'; 
-const green5 = 'https://i.pinimg.com/474x/2b/c1/2e/2bc12e7cfca167cd7d5633f14219d68c.jpg'; 
+const yellow5 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-yellow5.png'; 
+const green5 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-green5.png'; 
 const red6 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-red6.png'; 
 const blue6 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-blue6.png';
 const yellow6 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-yellow6.png';
 const green6 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-green6.png'; 
-const red7 = 'https://patana.fireflycloud.asia/resource.aspx?id=1385552'; 
+const red7 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-red7.png'; 
 const blue7 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-blue7.png'; 
 const yellow7 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-yellow7.png'; 
 const green7 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-green7.png'
@@ -47,30 +46,34 @@ const yellow9 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-yellow9
 const green9 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-green9.png';
 const blue9 = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-blue9.png';
 
+/** Every card of each color */
 const red_cards= [red0, red1, red2, red3, red4, red5, red6, red7, red8, red9];
 const blue_cards = [blue0, blue1, blue2, blue3, blue4, blue5, blue6, blue7, blue8, blue9];
 const green_cards = [green0, green1, green2, green3, green4, green5, green6, green7, green8, green9];
 const yellow_cards = [yellow0, yellow1, yellow2, yellow3, yellow4, yellow5, yellow6, yellow7, yellow8, yellow9];
 
-const stage = new Stage()
+/**
+ * theArray: All NumberCards 
+ * myArr: NumberCards in number format (eg. NumberCard21 -> 21) 
+ */
 const theArray = instance.signature('NumberCard').atoms()
-const elementsField = instance.field('hand')
-new TextBox('hello!', {x: 50, y: 50}, 'black', 12)
-const newArray = []; 
 const myArr = []; 
-let numbers1 = One.hand.toString().match(/\d+/g);
 for (const card in theArray) { 
-    newArray.push(theArray[card])
     myArr.push(card)
-    
 }
+
+/**
+ * commonElements: Common numbers in myArr and One.hand/Two.hand
+ * colors: colors of the NumberCard of each common card for hand
+ * ints: numbers of the NumberCard of each common card for hand
+ */
 let commonElements1 = myArr.filter(element => One.hand.toString().match(/\d+/g).includes(element));
 let colors1 = [];
 let ints1 = [];
 
 for (i = 0; i < commonElements1.length; i++) {
-  colors1.push(newArray[commonElements1[i]].color.toString())
-  ints1.push(newArray[commonElements1[i]].number.toString())
+  colors1.push(theArray[commonElements1[i]].color.toString())
+  ints1.push(theArray[commonElements1[i]].number.toString())
 }
 
 let commonElements2 = myArr.filter(element => Two.hand.toString().match(/\d+/g).includes(element));
@@ -78,92 +81,24 @@ let colors2 = [];
 let ints2 = [];
 
 for (i = 0; i < commonElements2.length; i++) {
-  colors2.push(newArray[commonElements2[i]].color.toString())
-  ints2.push(newArray[ commonElements2[i]].number.toString())
+  colors2.push(theArray[commonElements2[i]].color.toString())
+  ints2.push(theArray[ commonElements2[i]].number.toString())
 }
 
-stage.add(new TextBox({
-  text: commonElements2,
-  coords: {x:100, y:100},
-  color: 'black',
-  fontSize: 16}))
-stage.render(svg, document)
-
-
-
-
-
-//Get all the data out of Sterling
-// var stage =  document.getElementsByClassName("script-stage")[1];
-// const allinst = instances.map(instanceToGraph)
-// const numinst = instances.length - 1
-// var maindiv = getElem("stagediv","div")
-// stage.appendChild(maindiv); 
+//Debugging textbox
 // const stage = new Stage()
-// const theArray = instance.signature('NumberCard').atoms()[0]
-// const elementsField = instance.field('hand')
-// new TextBox('hello!', {x: 50, y: 50}, 'black', 12)
-
 // stage.add(new TextBox({
-//   text: `${theArray.join(elementsField)}`, 
+//   text: commonElements2,
 //   coords: {x:100, y:100},
 //   color: 'black',
 //   fontSize: 16}))
 // stage.render(svg, document)
-// function instanceToGraph(inst) { 
-//   //NumberCards
-//   const allcards = inst.signature("NumberCard").atoms(true);
-//   for (const card in allcards) {
-//     console.log("card: ", card)
-//     if (card in One.hand) {
-//       console.log("Yes")
-//     }
-//   }
-//   // const p1cards = inst.signature("hand").atoms(true); 
-//   //document.write(p1cards)
-//   //properties of cards 
-//   const colors = inst.field('color'); 
-//   const numbers = inst.field('number'); 
 
-//   // function getProcess(p) { 
-//   //   const prpg = p.join(proc_ptb).join(mapping).tuples().map(e => {return e.atoms()[0].id()})
-//   //               .reduce((a,v) => a +"," + v,"")  
-//   //   const perms = p.join(proc_ptb.join(permissions)).tuples().map(e => {return [e.atoms()[0].id(),e.atoms()[1].id()]})
-//   //                 .map(e => "(" + e[0] +","+e[1]+"),").reduce((a,v) => a + "\n " + v , "")
-                                                          
-    
-//   //   return {
-//   //   pname : p.id() , 
-//   //   proc_id : p.join(pid).tuples()[0].atoms()[0].id() , 
-//   //   proc_tbl : p.join(proc_ptb).tuples().map(e => {return e.atoms()[0].id()}).reduce((a,v) => a + " " + v , "") , 
-//   //   proc_pages: prpg , 
-//   //   perms: perms,
-//   //   proc_state: p.join(proc_st).tuples().map(e => {return e.atoms()[0].id()}).reduce((a,v) => a + " " + v , "")
-//   // }
-//   // }
-//   // const allprocs = procs.map(getProcess) ; 
-//   // function getPages(mp) {
-//   //   const pgdr = mp.atoms()[1].id()  ; 
-//   //   const pgArr = new Array() ; 
-//   //   for(const proc of allprocs) { 
-//   //     if(proc.proc_pages.includes(pgdr) ){
-//   //       pgArr.push(proc.pname)
-//   //     }
-//   //   }
-//   //   return {
-//   //     pagename:mp.atoms()[0].id(),
-//   //     addr: pgdr ,
-//   //     page_procs:pgArr
-//   //   }
-//   // }
-//   // const pgs = padr.tuples().map(getPages) ; 
-//   // return {
-//   //   process:allprocs,
-//   //   pages:pgs
-//   // } 
-  
-// }
-
+/**
+ * 
+ * @param {*} url 
+ * @returns Deck according to specifications 
+ */
 function make_deck(url) {
   const img = document.createElement('img');
   img.src = url;
@@ -177,21 +112,13 @@ function make_deck(url) {
   return img;
 }
 
-
-
-function trial(hand) { 
-    // const img1 = document.createElement('img')
-    // const img2 = document.createElement('img')
-    // const img3 = document.createElement('img')
-    // const img4 = document.createElement('img')
-    image_container = document.createElement("div")
-
-    // for (let i = 0; i < 4; i++) {
-    //   const color = One.hand[i].color
-    //   const num = One.hand[i].number //not used rn 
-    //   var imageStyle = "width: 100px; height: 100px; background-color: gray; margin: 10px; float: left;";
-    //   const img = document.createElement('img')
-    //   img.setAttribute("style", imageStyle)
+/**
+ * 
+ * @param {*} hand - Either 1 or 2 for player 1 or 2
+ * @returns image container with images of each card in that player's hand
+ */
+function get_cards(hand) { 
+    image_container = document.createElement("div") //contains images to be returned
     if (hand == 1) {
       for (i = 0; i < colors1.length; i++) {
         var imageStyle = "width: 100px; height: 100px; background-color: gray; margin: 10px; float: left;";
@@ -232,69 +159,171 @@ function trial(hand) {
         image_container.appendChild(img)
       }
     }
-      // if (i == 0){ 
-      //   img.src = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-red1.png'
-      // } else if (i == 1) {
-      //   img.src = 'https://i.pinimg.com/originals/80/8a/e0/808ae01a2c8c8634b967c9a9ea59b1cf.png'
-      // } else if (i == 2) { 
-      //   img.src = 'https://media.baamboozle.com/uploads/images/182571/1613773171_86287.png'
-      // } else if (i == 3) {
-      //   img.src = 'https://dbdzm869oupei.cloudfront.net/img/vinylrugs/preview/55306.png'
-      // }
-    //   if (color == Red) { 
-    //     img.src = 'https://unocardinfo.victorhomedia.com/graphics/uno_card-red1.png'
-    //   } else if (color == Blue) {
-    //     img.src = 'https://i.pinimg.com/originals/80/8a/e0/808ae01a2c8c8634b967c9a9ea59b1cf.png'
-    //   } else if (color == Green) { 
-    //     img.src = 'https://media.baamboozle.com/uploads/images/182571/1613773171_86287.png'
-    //   } else if (color == Yellow) {
-    //     img.src = 'https://dbdzm869oupei.cloudfront.net/img/vinylrugs/preview/55306.png'
-    //   }
-      // image_container.appendChild(img)
-      // //document.write(hand1)
-      // for (const ind in hand1.tuples()) {
-      //   const cards = hand1.tuples()[ind]
-      //   //document.write(cards)
-      //   // for (const ind2 in cards.tuples()) {
-      //   //   document.write(typeof(cards.tuples()[0]))
-      //   // }     
-      // }
-     
-    //}
     return image_container
   }
-function make_blank() {
-  const div = make_deck('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fed3bb24-454f-4bdf-a721-6aa8f23e7cef/d9gnihf-ec16caeb-ec9c-4870-9480-57c7711d844f.png/v1/fill/w_486,h_759/uno_card_back_by_wackosamurai_d9gnihf-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzU5IiwicGF0aCI6IlwvZlwvZmVkM2JiMjQtNDU0Zi00YmRmLWE3MjEtNmFhOGYyM2U3Y2VmXC9kOWduaWhmLWVjMTZjYWViLWVjOWMtNDg3MC05NDgwLTU3Yzc3MTFkODQ0Zi5wbmciLCJ3aWR0aCI6Ijw9NDg2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.TMtpsV_KVjgkIMqwza3ooob2Xq5bihDuT0JVsOldrpA' )
+
+function deck() {
+  var url = 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fed3bb24-454f-4bdf-a721-6aa8f23e7cef/d9gnihf-ec16caeb-ec9c-4870-9480-57c7711d844f.png/v1/fill/w_486,h_759/uno_card_back_by_wackosamurai_d9gnihf-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzU5IiwicGF0aCI6IlwvZlwvZmVkM2JiMjQtNDU0Zi00YmRmLWE3MjEtNmFhOGYyM2U3Y2VmXC9kOWduaWhmLWVjMTZjYWViLWVjOWMtNDg3MC05NDgwLTU3Yzc3MTFkODQ0Zi5wbmciLCJ3aWR0aCI6Ijw9NDg2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.TMtpsV_KVjgkIMqwza3ooob2Xq5bihDuT0JVsOldrpA'
+  if (Game.lastPlayed.toString() != null) {
+    const colorlp = Game.lastPlayed.color.toString(); 
+    const numlp = Game.lastPlayed.number.toString(); 
+    if (colorlp == "Red0") {
+      url = red_cards[numlp] 
+    }
+    else if (colorlp == "Blue0") {
+      url = blue_cards[numlp]
+    }
+    if (colorlp == "Yellow0") {
+      url = yellow_cards[numlp]
+    }
+    if (colorlp == "Green0") {
+      url = green_cards[numlp]
+    }
+  }
+  const div = make_deck(url)
   div.style.opacity = '80%'
   return div
 }
 
-function make_cards(handnum) {
-    const div = trial(handnum)
+function playerHand(handnum) {
+    const div = get_cards(handnum)
     div.style.opacity = '70%'
     return div 
 }
 
+popup.document.body.appendChild(playerHand(1))
+popup.document.body.appendChild(deck())
+popup.document.body.appendChild(playerHand(2))
 
-// Create four div elements
-var box1 = document.createElement("div");
-var box2 = document.createElement("div");
-var box3 = document.createElement("div");
-var box4 = document.createElement("div");
+/*
+STATE_HEIGHT = 100
+states = 
+     d3.select(svg)
+     // <g> is element for group in SVG
+     // D3 is based on these "sandwich" calls:
+     //   there's no <g> element yet, but there will be once the data is
+     //   processed. Bind the data to those <g> elements...
+     .selectAll('g') 
+     // Here's the data to bind. The map just makes sure we have the array index
+     // Can use either old or new style anonymous functions
+     .data(instances.map(function(d,i) {
+        return {item: d, index: i}    
+     }))
+     // Now, for every entry in that array...
+     .enter()   
+     // Add a <g> (finally)
+     .append('g')
+     // Give it a class, for ease of debugging and possible use in future visualizations
+     .classed('state', true)
+     // Give it an 'id' attribute that's the state index (used later for labeling)
+     .attr('id', d => d.index)        
 
-// Set the styles for the boxes
-var boxStyle = "width: 100px; height: 100px; background-color: gray; margin: 10px; float: left;";
-box1.setAttribute("style", boxStyle);
-box2.setAttribute("style", boxStyle);
-box3.setAttribute("style", boxStyle);
-box4.setAttribute("style", boxStyle);
+// Now, for each state <g>, add a <rect> to the group
+states
+    .append('rect')
+    .attr('x', 10)
+     .attr('y', function(d) {
+         return 20 + STATE_HEIGHT * d.index
+     })
+    .attr('width', 300)
+    .attr('height', STATE_HEIGHT)
+    .attr('stroke-width', 2)
+    .attr('stroke', 'black')
+    .attr('fill', 'transparent');
 
-// Add the boxes to the new window
-// popup.document.body.appendChild(box1);
-// popup.document.body.appendChild(box2);
-popup.document.body.appendChild(make_cards(1))
-const emptyParagraph = popup.document.createElement("p");
-emptyParagraph.textContent = "";
-popup.document.body.appendChild(emptyParagraph);
-popup.document.body.appendChild(make_blank())
-popup.document.body.appendChild(make_cards(2))
+// Debugging code, used to confirm that the rects were being 
+// re-rendered every run, early in writing this script
+// Leaving this in for illustrative purposes
+// states
+//     .append("text")
+//     .style("fill", "black")
+//      .attr('y', function(d) {
+//          return 40 + 220 * d.index
+//      })
+//      .attr('x', 50)
+//      // If we don't wrap in a function, will be same value for ALL states
+//      //.text(Math.random());
+//      // Instead, provide a different random number for each state label
+//      .text(function(d) {
+//          return Math.random()});
+
+// For each state <g>, add a state index label
+// Recall that 'd' here is a variable bound to a specific data element,
+//   in this case, a state
+states
+    .append("text")
+    .style("fill", "black")
+     .attr('y', function(d) {
+         return 40 + STATE_HEIGHT * d.index
+     })
+     .attr('x', 50)
+     .text(d => "State "+d.index);
+
+
+hands = 
+     states 
+     .selectAll('rectangle')
+     .data( function(d) {
+       inst = d.item 
+       hand1 = One.hand.toString()
+       hand2 = Two.hand.toString()
+       hands = hand1.concat(hand2)
+       cards = inst.signature('NumberCard').tuples()
+       return cards.map( function (ld) {
+         return {item: ld,
+                 state: d.index
+                 
+                }
+       })
+     }
+     )
+// Now, within each state <g>
+// lightGroups = 
+//     states
+//     // ...as before, we want to bind the sub-data (light values WITHIN a state)
+//     .selectAll('circle')
+//     .data( function(d) {        
+//         inst = d.item
+//         lit = inst.signature('Lit').tuples()
+//         unlit = inst.signature('Unlit').tuples()
+//         lights = lit.concat(unlit)
+//         return lights.map( function (ld) {
+//             return {item:  ld, 
+//                     index: lightToIdx[ld.toString().slice(-1)],
+//                     on: lit.includes(ld), 
+//                     state: d.index}
+//         })
+    //})
+    // for each of them
+    .enter()
+    // Add a new sub-group
+    .append('g')
+    .classed('light', true)
+// Each light contains a circle...
+hands
+    .append('circle')    
+    // useful for debugging in inspector
+    .attr('index', d => d.index)
+    .attr('state', d => d.state)
+    .attr('item',  d => d.item)
+    .attr('r', 20)
+    .attr('cx', function(d) {
+        return 50 + d.index * 50
+    })
+    .attr('cy', function(d) {
+        return 70 + d.state * STATE_HEIGHT
+    })
+    .attr('stroke', 'gray')
+    .attr('fill', function(ld){
+        if(ld.on == true) return 'yellow';
+        else return 'gray';
+    });
+
+// ...and an index label
+hands
+     .append('text')
+     .attr('y', d => 75 + d.state * STATE_HEIGHT)
+     .attr('x', d => 47 + d.index * 50)
+     .text(d=>d.index);
+
+     */ 
