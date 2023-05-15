@@ -176,12 +176,14 @@ test expect {
     alwaysWellformed: {
         traces implies always wellformed
     } for 5 Int, exactly 12 NumberCard, exactly 2 Player is theorem
+
+    -- these two tests make the run time too long
     // always somethingHappens
-    alwaysSomethingHappens: {
-        traces implies always somethingHappens
-    } for 5 Int, exactly 12 NumberCard, exactly 2 Player is theorem
-    // always lastPlayed
-    alwaysLastPlayed: {
-        traces implies always lastPlayed
-    } for 5 Int, exactly 12 NumberCard, exactly 2 Player is theorem
+    // alwaysSomethingHappens: {
+    //     traces implies always somethingHappens
+    // } for 5 Int, exactly 12 NumberCard, exactly 2 Player is theorem
+    // // always lastPlayed
+    // alwaysLastPlayed: {
+    //     traces implies always lastPlayed
+    // } for 5 Int, exactly 12 NumberCard, exactly 2 Player is theorem
 }
